@@ -1,71 +1,92 @@
-// FELIPE COSTA UNSONST
-// 854155
+//FELIPE COSTA UNSONST
+//854155
 
-module Adicao;
-  reg [7:0] a, b;
-  wire [7:0] sum;
+module Guia_0202;  
+   real        x;  
+   integer     y = 7; 
+   reg [7:0]   b = 0; 
 
-  // Actions
-  initial begin
-    $display("Adicao - 101.01(2) + 10.011(2)");
-    a = 8'b1010100;
-    b = 8'b00100011;
-    assign sum = a + b;
-    $display("Result = %b", sum);
-  end
-endmodule
+   initial begin 
+     $display("Guia_0202 - Tests");
 
-module Subtracao;
-  reg [7:0] a, b;
-  wire [7:0] diff;
+     x = 0.625; 
+     b = 0;
+     y = 7;
+     $display("x = %f", x); 
+     while (x > 0 && y >= 0) begin 
+       if (x * 2 >= 1) begin 
+         b[y] = 1; 
+         x = x * 2.0 - 1.0; 
+       end else begin 
+         b[y] = 0; 
+         x = x * 2.0; 
+       end 
+       $display("b = 0.%8b", b); 
+       y = y - 1; 
+     end 
 
-  initial begin
-    $display("Subtracao - 1000.001(2) - 10.01(2)");
-    a = 8'b10000001; 
-    b = 8'b00010010; 
-    assign diff = a - b;
-    $display("Result = %b", diff);
-  end
-endmodule
+     x = 1.75; 
+     b = 0;
+     y = 7;
+     $display("x = %f", x); 
+     while (x > 0 && y >= 0) begin 
+       if (x * 2 >= 1) begin 
+         b[y] = 1; 
+         x = x * 2.0 - 1.0; 
+       end else begin 
+         b[y] = 0; 
+         x = x * 2.0; 
+       end 
+       $display("b = 0.%8b", b); 
+       y = y - 1; 
+     end 
 
-module Multiplicacao;
-  reg [7:0] a, b;
-  wire [15:0] product;
+     x = 3.125; 
+     b = 0;
+     y = 7;
+     $display("x = %f", x); 
+     while (x > 0 && y >= 0) begin 
+       if (x * 2 >= 1) begin 
+         b[y] = 1; 
+         x = x * 2.0 - 1.0; 
+       end else begin 
+         b[y] = 0; 
+         x = x * 2.0; 
+       end // end if 
+       $display("b = 0.%8b", b); 
+       y = y - 1; 
+     end 
 
-  initial begin
-    $display("Multiplicacao - 101.110(2) * 10.001(2)");
-    a = 8'b1011100; 
-    b = 8'b00100010; 
-    assign product = a * b;
-    $display("Result = %b", product);
-  end
-endmodule
+     x = 4.3125; 
+     b = 0;
+     y = 7;
+     $display("x = %f", x); 
+     while (x > 0 && y >= 0) begin 
+       if (x * 2 >= 1) begin 
+         b[y] = 1; 
+         x = x * 2.0 - 1.0; 
+       end else begin 
+         b[y] = 0; 
+         x = x * 2.0; 
+       end 
+       $display("b = 0.%8b", b); 
+       y = y - 1; 
+     end 
 
-module Divisao;
-  reg [15:0] a, b;
-  wire [15:0] quotient;
-  wire [15:0] remainder;
-
-  initial begin
-    $display("Divisao - 10110.01(2) / 11.011(2)");
-    a = 16'b1011001000; 
-    b = 16'b00011011; 
-    assign quotient = a / b;
-    assign remainder = a % b;
-    $display("Quotient = %b", quotient);
-    $display("Remainder = %b", remainder);
-  end
-endmodule
-
-module Resto;
-  reg [15:0] a, b;
-  wire [15:0] remainder;
-
-  initial begin
-    $display("Resto - 1101101(2) % 1011(2)");
-    a = 16'b1101101; 
-    b = 16'b1011;
-    assign remainder = a % b;
-    $display("Result = %b", remainder);
-  end
-endmodule
+     x = 7.875; 
+     b = 0;
+     y = 7;
+     $display("x = %f", x); 
+     while (x > 0 && y >= 0) begin 
+       if (x * 2 >= 1) begin 
+         b[y] = 1; 
+         x = x * 2.0 - 1.0; 
+       end else begin 
+         b[y] = 0; 
+         x = x * 2.0; 
+       end 
+       $display("b = 0.%8b", b); 
+       y = y - 1; 
+     end 
+   end 
+endmodule 
