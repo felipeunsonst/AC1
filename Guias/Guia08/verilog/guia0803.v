@@ -1,49 +1,60 @@
 //FELIPE COSTA UNSONST
 //854155
-module halfDiff ( output carry, output diff, input a, input b ); 
-    wire not_a;
-    not NOT0 ( not_a, a );
-    xor XOR0 ( diff , a, b ); 
-    and AND0 ( carry, not_a, b ); 
-endmodule  
+module isEquals ( output s, input a, input b ); 
+    xnor XNOR0 ( s, a, b ); 
+endmodule 
 
-module fullDiff ( output carry, output diff, input a,  input b,  input carryOut ); 
-    wire w1,w2,w3;
-    halfDiff HD0 ( w1, w2, a, b );
-    halfDiff HD1 ( w3, diff, w2, carryOut );
-    or       OR1 ( carry, w1, w3 );
-endmodule
-
-module Guia_0802; 
-
+module Guia_0803; 
     reg  [5:0] x; 
     reg  [5:0] y; 
-    wire [5:0] carry;
-    wire [6:0] dif; 
 
-    fullDiff FD0 ( carry[0], dif[0], x[0], y[0], 1'b0     ); 
-    fullDiff FD1 ( carry[1], dif[1], x[1], y[1], carry[0] ); 
-    fullDiff FD2 ( carry[2], dif[2], x[2], y[2], carry[1] ); 
-    fullDiff FD3 ( carry[3], dif[3], x[3], y[3], carry[2] ); 
-    fullDiff FD4 ( carry[4], dif[4], x[4], y[4], carry[3] ); 
-    fullDiff FD5 ( carry[5], dif[5], x[5], y[5], carry[4] ); 
-    assign dif[6] = carry[5];    
+    reg  [5:0] a;
+    reg  [5:0] b; 
+
+    wire [5:0] s1; 
+    wire [5:0] s2; 
+    
+    isEquals XY0 ( s1[0], x[0], y[0] );
+    isEquals XY1 ( s1[1], x[1], y[1] );
+    isEquals XY2 ( s1[2], x[2], y[2] );
+    isEquals XY3 ( s1[3], x[3], y[3] );
+    isEquals XY4 ( s1[4], x[4], y[4] );
+    isEquals XY5 ( s1[5], x[5], y[5] );
+
+    isEquals AB0 ( s2[0], a[0], b[0] );
+    isEquals AB1 ( s2[1], a[1], b[1] );
+    isEquals AB2 ( s2[2], a[2], b[2] );
+    isEquals AB3 ( s2[3], a[3], b[3] );
+    isEquals AB4 ( s2[4], a[4], b[4] );
+    isEquals AB5 ( s2[5], a[5], b[5] );
 
     initial begin : start
-        x = 6'b000000;
-        y = 6'b000000;
-    end
+        x = 6'b101_010;
+        y = 6'b101_010;
+        a = 6'b100_111;
+        b = 6'b100_100;
+    end 
 
     initial begin : main 
-        $display("Guia_0802 - Vinicius Miranda de Araujo - 812839"); 
-        $display("Test ALU’s full difference");  
-        $display( "  x   -   y   =   dif" );
-        $monitor( "%b - %b = %b", x, y, dif );
-        for( integer i = 0; i < 64; i++ ) begin
-            { x } = i;
-            { y } = i;
-            #1;
-        end 
+        $display("Test ALU’s equality comparator"); 
+
+        #1;
+        $write( "%b  ==  %b ? %b = ", x, y, s1 );
+		if( s1 == 6'b111111 ) begin
+			$display( "true" );
+		end 
+		else begin
+			$display( "false" );
+		end 
+
+        #1;
+        $write( "%b  ==  %b ? %b = ", a, b, s2 );
+		if( s2 == 6'b111111 ) begin
+			$display( "true" );
+		end 
+		else begin
+			$display( "false" );
+		end 
     end 
-endmodule
+endmodule 
     
